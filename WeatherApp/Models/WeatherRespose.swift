@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Первоначальный блок с полями, который приходит
+/// Первоначальный блок с полями, который приходит с сервера.
 struct WheatherResponse: Codable {
   let currnet: Weather
   let hourly: [Weather] // приходит несколько блоков на каждый час

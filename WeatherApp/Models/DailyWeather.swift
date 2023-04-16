@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Это блок поля "daily", который лежит внутри WheatherResponse - первоначального блока 
+/// Это блок поля "daily", который лежит внутри WheatherResponse - первоначального блока
 struct DailyWeather: Codable, Identifiable {
   let date: Int
   let temperature: Temperature
