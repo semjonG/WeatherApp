@@ -49,11 +49,11 @@ final class CityViewVM: ObservableObject {
     if weather.currnet.detailedWeather.count > 0 {
       return weather.currnet.detailedWeather[0].icon
     }
-    return "sun.max.fill"
+    return "dayClearSky"
   }
   
   var temperature: String {
-    return formattedTemperature(temperature: weather.currnet.temperature)
+    return getTemperatureFor(temperature: weather.currnet.temperature)
   }
   
   var windSpeed: String {
@@ -77,15 +77,15 @@ final class CityViewVM: ObservableObject {
     return "sun.max.fill"
   }
   
-  func formattedTemperature(temperature: Double) -> String {
+  func getTemperatureFor(temperature: Double) -> String {
     String(format: "%0.1", temperature)
   }
   
-  func formattedTime(timestamp: Int) -> String {
+  func getHourFor(timestamp: Int) -> String {
     return timeFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
   }
   
-  func formattedDay(timestamp: Int) -> String {
+  func getDayFor(timestamp: Int) -> String {
     return dayFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
   }
   
@@ -144,8 +144,8 @@ final class CityViewVM: ObservableObject {
     case "11n": return "nightThunderstorm"
     case "13d": return "daySnow"
     case "13n": return "nightSnow"
-    case "50d": return "mist"
-    case "50n": return "mist"
+    case "50d": return "dayMist"
+    case "50n": return "nightMist"
     default: return "dayClearSky"
     }
   }

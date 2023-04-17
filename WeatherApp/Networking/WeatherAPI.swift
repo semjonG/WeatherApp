@@ -9,5 +9,5 @@ import Foundation
 
 struct WeatherAPI {
   static let apiKey = "Here should be your APIKey from https://openweathermap.org"
-  
 }
+

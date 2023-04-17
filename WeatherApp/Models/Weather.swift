@@ -21,6 +21,7 @@ struct Weather: Codable, Identifiable {
   let clouds: Int
   let windSpeed: Double
   let windDeg: Int
+  /// Подробная информация в конце каждого блока с полями, поле "weather"
   let detailedWeather: [WeatherDetail]
   
   enum CodingKeys: String, CodingKey {
