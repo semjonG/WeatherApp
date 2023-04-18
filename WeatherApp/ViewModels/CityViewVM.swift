@@ -12,7 +12,7 @@ import CoreLocation
 /// CoreLocation используется, чтобы доставать координаты из адреса.
 final class CityViewVM: ObservableObject {
   @Published var weather = WheatherResponse.empty()
-  #warning("как понять этот код - в чатгпт")
+
   @Published var city = "San Francisco" {
     didSet {
       getLocation()
@@ -105,7 +105,7 @@ final class CityViewVM: ObservableObject {
       let urlString = WeatherAPI.getURLFor(lat: coordinates.latitude, lon: coordinates.longitude)
       getWeatherInternal(city: city, for: urlString)
     } else {
-      #warning("заглушка, объект == nil. проверить без этого")
+      // заглушка, объект == nil
       let urlString = WeatherAPI.getURLFor(lat: 37.5485, lon: -121.9886)
       getWeatherInternal(city: city, for: urlString)
     }

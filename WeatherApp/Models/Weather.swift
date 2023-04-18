@@ -56,7 +56,6 @@ struct Weather: Codable, Identifiable {
   }
 }
 
-#warning("почему вынесен id когда он должен лежать в WeatherDetail, если это он. возможно, это из-за протокола Identifiable. и вообще зачем он?")
 extension Weather {
   var id: UUID {
     return UUID()
