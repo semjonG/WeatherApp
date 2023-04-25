@@ -18,6 +18,4 @@ struct WeatherAPI {
 - SwiftUI
 - CoreLocation
 
-<p float="left">
  <img width="300" src="https://github.com/semjonG/WeatherApp/blob/main/running.gif?raw=true">
-</p>
