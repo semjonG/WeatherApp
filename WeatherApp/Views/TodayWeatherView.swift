@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TodayWeatherView: View {
-  @ObservedObject var cityVM: CityViewVM
-  
+  @ObservedObject var cityVM = CityViewVM()
+
     var body: some View {
       VStack(spacing: 10) {
         Text("Today")
@@ -21,7 +21,7 @@ struct TodayWeatherView: View {
             .frame(width: 100, height: 100)
           
           VStack(alignment: .leading) {
-            Text("\(cityVM.temperature)℃")
+            Text("\(cityVM.temperature) ℃")
               .font(.system(size: 42))
             Text(cityVM.conditions)
           }
@@ -29,17 +29,17 @@ struct TodayWeatherView: View {
         
         HStack {
           Spacer()
-          setWidgetView(image: "wind", color: .green, title: "\(cityVM.windSpeed)m/sec")
+          setWidgetView(image: "wind", color: .green, title: "\(cityVM.windSpeed) m/s")
           Spacer()
-          setWidgetView(image: "drop.fill", color: .blue, title: "\(cityVM.humidity)")
+          setWidgetView(image: "drop.fill", color: .blue, title: "\(cityVM.humidity) %")
           Spacer()
-          setWidgetView(image: "umbrella.fill", color: .red, title: "\(cityVM.rainChances)")
+          setWidgetView(image: "umbrella.fill", color: .red, title: "\(cityVM.rainChances) %")
           Spacer()
         }
       }
       .padding()
       .foregroundColor(.white)
-      .background(RoundedRectangle(cornerRadius: 20)
+      .background(RoundedRectangle(cornerRadius: 16)
         .fill(LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.5), Color.blue]),
                              startPoint: .top,
                              endPoint: .bottom))
@@ -54,7 +54,7 @@ struct TodayWeatherView: View {
         .padding()
         .font(.title)
         .foregroundColor(color)
-        .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
+        .background(RoundedRectangle(cornerRadius: 16).fill(Color.white))
       
       Text(title)
     }

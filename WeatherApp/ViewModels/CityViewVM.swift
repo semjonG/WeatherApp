@@ -11,7 +11,7 @@ import CoreLocation
 /// Класс предназначен для наблюдения за изменениями, когда они происходят (когда API возвращает ответ).
 /// CoreLocation используется, чтобы доставать координаты из адреса.
 final class CityViewVM: ObservableObject {
-  @Published var weather = WheatherResponse.empty()
+  @Published var weather = WeatherResponse.empty()
 
   @Published var city = "San Francisco" {
     didSet {
@@ -42,43 +42,44 @@ final class CityViewVM: ObservableObject {
   }
   
   var date: String {
-    dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(weather.currnet.date)))
+    dateFormatter.locale = Locale(identifier: "en_US")
+   return dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(weather.current.date)))
   }
   
   var weatherIcon: String {
-    if weather.currnet.detailedWeather.count > 0 {
-      return weather.currnet.detailedWeather[0].icon
+    if weather.current.detailedWeather.count > 0 {
+      return weather.current.detailedWeather[0].icon
     }
     return "dayClearSky"
   }
   
   var temperature: String {
-    return getTemperatureFor(temperature: weather.currnet.temperature)
+    return getTemperatureFor(temperature: weather.current.temperature)
   }
   
   var windSpeed: String {
-    return String(format: "%0.1", weather.currnet.windSpeed)
+    return String(format: "%0.1f", weather.current.windSpeed)
   }
   
   var humidity: String {
-    return String(format: "%d%", weather.currnet.humidity)
+    return String(format: "%d%", weather.current.humidity)
   }
   
   /// точка росы/возможность дождя
   var rainChances: String {
-    return String(format: "%0.0%", weather.currnet.dewPoint)
+    return String(format: "%0.0f", weather.current.dewPoint)
   }
   
   /// общая характеристика погоды, например - облачно
   var conditions: String {
-    if weather.currnet.detailedWeather.count > 0 {
-      return weather.currnet.detailedWeather[0].main
+    if weather.current.detailedWeather.count > 0 {
+      return weather.current.detailedWeather[0].main
     }
-    return "sun.max.fill"
+    return ""
   }
   
   func getTemperatureFor(temperature: Double) -> String {
-    String(format: "%0.1", temperature)
+    String(format: "%0.1f", temperature)
   }
   
   func getHourFor(timestamp: Int) -> String {
@@ -93,7 +94,8 @@ final class CityViewVM: ObservableObject {
   /// Может распознать введенное название города в поисковую строку и конвертировать в координаты.
   private func getLocation() {
     CLGeocoder().geocodeAddressString(city) { placemarks, error in
-      if let places = placemarks, let place = places.first {
+      if let places = placemarks,
+         let place = places.first {
         self.getWeather(coordinates: place.location?.coordinate)
       }
     }
@@ -105,7 +107,6 @@ final class CityViewVM: ObservableObject {
       let urlString = WeatherAPI.getURLFor(lat: coordinates.latitude, lon: coordinates.longitude)
       getWeatherInternal(city: city, for: urlString)
     } else {
-      // заглушка, объект == nil
       let urlString = WeatherAPI.getURLFor(lat: 37.5485, lon: -121.9886)
       getWeatherInternal(city: city, for: urlString)
     }
@@ -113,7 +114,7 @@ final class CityViewVM: ObservableObject {
   
   /// Функция, в которой @Published проперти вяжется с пришедшими данными с сервера.
   private func getWeatherInternal(city: String, for urlString: String) {
-    NetworkManager<WheatherResponse>.fetch(for: URL(string: urlString)!) { result in
+    NetworkManager<WeatherResponse>.fetch(for: URL(string: urlString)!) { result in
       switch result {
       case .success(let response):
         DispatchQueue.main.async {

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DailyWeatherView: View {
-  @ObservedObject var cityVM: CityViewVM
-  
+  @ObservedObject var cityVM = CityViewVM()
+
     var body: some View {
       // доступ к погоде по дням
       ForEach(cityVM.weather.daily) { weather in
@@ -31,7 +31,7 @@ struct DailyWeatherView: View {
     .padding(.horizontal, 40)
     .padding(.vertical, 15)
 //    #warning("нужно будет сделать вью модифайер или расширение, чтобы не копировать этот код")
-    .background(RoundedRectangle(cornerRadius: 5)
+    .background(RoundedRectangle(cornerRadius: 8)
       .fill(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.5411764706, green: 0.7607843137, blue: 0.9764705882, alpha: 1)), Color(#colorLiteral(red: 0.4196078431, green: 0.5333333333, blue: 0.937254902, alpha: 1))]),
                            startPoint: .top,
                            endPoint: .bottom))

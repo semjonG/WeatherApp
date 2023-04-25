@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct MenuHeaderView: View {
-  
+
   ///проперти, в которое будет приходить вью-модель с данными о погоде
-  @ObservedObject var cityVM: CityViewVM
-  
+  @ObservedObject var cityVM = CityViewVM()
+
   @State private var searchCity = "San Francisco"
   
   var body: some View {

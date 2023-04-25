@@ -42,8 +42,6 @@ struct Weather: Codable, Identifiable {
   // стартовые значения
   init() {
     date = 0
-//    sunrise = 0
-//    sunset = 0
     temperature = 0.0
     feelsLike = 0.0
     pressure = 0
@@ -58,7 +56,6 @@ struct Weather: Codable, Identifiable {
 
 extension Weather {
   var id: UUID {
-    return UUID()
+    UUID()
   }
 }
-

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct HourlyWeatherView: View {
-  @ObservedObject var cityVM: CityViewVM
-  
+  @ObservedObject var cityVM = CityViewVM()
+
     var body: some View {
       ScrollView(.horizontal, showsIndicators: false) {
-        HStack(spacing: 20) {
+        HStack(spacing: 15) {
           // доступ к погоде по часам
           ForEach(cityVM.weather.hourly) { weather in
             let icon = cityVM.getWeatherIconFor(icon: weather.detailedWeather.count > 0 ? weather.detailedWeather[0].icon : "sun.max.fill")
@@ -32,7 +32,7 @@ struct HourlyWeatherView: View {
     }
     .foregroundColor(.white)
     .padding()
-    .background(RoundedRectangle(cornerRadius: 5)
+    .background(RoundedRectangle(cornerRadius: 16)
       .fill(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.5411764706, green: 0.7607843137, blue: 0.9764705882, alpha: 1)), Color(#colorLiteral(red: 0.4196078431, green: 0.5333333333, blue: 0.937254902, alpha: 1))]),
                            startPoint: .top,
                            endPoint: .bottom))

@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Это блок поля "daily", который лежит внутри WheatherResponse - первоначального блока
+/// Это блок поля "daily", который лежит внутри WeatherResponse - первоначального блока
 struct DailyWeather: Codable, Identifiable {
   let date: Int
   let temperature: Temperature
@@ -28,6 +28,6 @@ struct DailyWeather: Codable, Identifiable {
 
 extension DailyWeather {
   var id: UUID {
-    return UUID()
+    UUID()
   }
 }
