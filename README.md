@@ -18,4 +18,14 @@ struct WeatherAPI {
 - SwiftUI
 - CoreLocation
 - Lottie Animation
- <img width="300" src="https://github.com/semjonG/WeatherApp/blob/main/running.gif?raw=true">
+ 
+<table>
+  <tr>
+    <td>Running</td>
+    <td>Main screen</td>
+  </tr>
+  <tr>
+    <td><img width="300" src="https://github.com/semjonG/WeatherApp/blob/main/running.gif"></td>
+    <td><img width="300" src="https://github.com/semjonG/WeatherApp/blob/main/screen.png?raw=true"></td>
+  </tr>
+ </table>
