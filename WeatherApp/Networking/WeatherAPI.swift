@@ -8,7 +8,7 @@
 import Foundation
 
 struct WeatherAPI {
-    static let apiKey = "PUT HERE YOUR API KEY"
+    static let apiKey = "ef051bc0fd49e2d695fdc3e3983c646e"
 }
 
 extension WeatherAPI {

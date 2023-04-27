@@ -1,5 +1,5 @@
 //
-//  DailyWeatherView.swift
+//  DailyWeatherCell.swift
 //  WeatherApp
 //
 //  Created by mac on 17.04.2023.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct DailyWeatherView: View {
-  @ObservedObject var cityVM = CityViewVM()
+struct DailyWeatherCell: View {
+  @ObservedObject var cityVM: CityViewVM
 
     var body: some View {
-      // доступ к погоде по дням
+      // доступ к погоде по дням (данные из VM кладем в ячейку)
       ForEach(cityVM.weather.daily) { weather in
         LazyVStack {
           dailyCell(weather: weather)
@@ -30,7 +30,6 @@ struct DailyWeatherView: View {
     .foregroundColor(.white)
     .padding(.horizontal, 40)
     .padding(.vertical, 15)
-//    #warning("нужно будет сделать вью модифайер или расширение, чтобы не копировать этот код")
     .background(RoundedRectangle(cornerRadius: 8)
       .fill(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.5411764706, green: 0.7607843137, blue: 0.9764705882, alpha: 1)), Color(#colorLiteral(red: 0.4196078431, green: 0.5333333333, blue: 0.937254902, alpha: 1))]),
                            startPoint: .top,
@@ -41,7 +40,7 @@ struct DailyWeatherView: View {
   }
 }
 
-struct DailyWeatherView_Previews: PreviewProvider {
+struct DailyWeatherCell_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }

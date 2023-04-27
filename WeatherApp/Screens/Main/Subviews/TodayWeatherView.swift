@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TodayWeatherView: View {
-  @ObservedObject var cityVM = CityViewVM()
+  @ObservedObject var cityVM: CityViewVM
 
     var body: some View {
       VStack(spacing: 10) {

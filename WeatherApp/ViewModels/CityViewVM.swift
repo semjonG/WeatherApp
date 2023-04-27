@@ -11,6 +11,9 @@ import CoreLocation
 /// Класс предназначен для наблюдения за изменениями, когда они происходят (когда API возвращает ответ).
 /// CoreLocation используется, чтобы доставать координаты из адреса.
 final class CityViewVM: ObservableObject {
+  
+  @StateObject var locationManager = LocationManager()
+  
   @Published var weather = WeatherResponse.empty()
 
   @Published var city = "San Francisco" {
@@ -18,6 +21,8 @@ final class CityViewVM: ObservableObject {
       getLocation()
     }
   }
+  
+  // MARK: - Private properties
   
   private lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
@@ -27,6 +32,7 @@ final class CityViewVM: ObservableObject {
   
   private lazy var dayFormatter: DateFormatter = {
     let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "en_US")
     formatter.dateFormat = "EEE"
     return formatter
   }()
@@ -40,6 +46,8 @@ final class CityViewVM: ObservableObject {
   init() {
     getLocation()
   }
+  
+  // MARK: - Properties
   
   var date: String {
     dateFormatter.locale = Locale(identifier: "en_US")
@@ -78,17 +86,17 @@ final class CityViewVM: ObservableObject {
     return ""
   }
   
-  func getTemperatureFor(temperature: Double) -> String {
-    String(format: "%0.1f", temperature)
+  ///широта по текущей геопозиции пользователя
+  var currentUsersLatitude: Double {
+    return locationManager.lastLocation?.coordinate.latitude ?? 0.0
+  }
+
+  ///долгота по текущей геопозиции пользователя
+  var currentUsersLongitude: Double {
+    return locationManager.lastLocation?.coordinate.longitude ?? 0.0
   }
   
-  func getHourFor(timestamp: Int) -> String {
-    return timeFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
-  }
-  
-  func getDayFor(timestamp: Int) -> String {
-    return dayFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
-  }
+  // MARK: - Private methods
   
   /// Функция, вызывающая getWeather(), в который подставляются координаты.
   /// Может распознать введенное название города в поисковую строку и конвертировать в координаты.
@@ -107,7 +115,8 @@ final class CityViewVM: ObservableObject {
       let urlString = WeatherAPI.getURLFor(lat: coordinates.latitude, lon: coordinates.longitude)
       getWeatherInternal(city: city, for: urlString)
     } else {
-      let urlString = WeatherAPI.getURLFor(lat: 37.5485, lon: -121.9886)
+//      let urlString = WeatherAPI.getURLFor(lat: 37.5485, lon: -121.9886)
+      let urlString = WeatherAPI.getURLFor(lat: currentUsersLatitude, lon: currentUsersLongitude)
       getWeatherInternal(city: city, for: urlString)
     }
   }
@@ -124,6 +133,19 @@ final class CityViewVM: ObservableObject {
         print(error)
       }
     }
+  }
+  
+  // MARK: - Methods
+  func getTemperatureFor(temperature: Double) -> String {
+    String(format: "%0.1f", temperature)
+  }
+  
+  func getHourFor(timestamp: Int) -> String {
+    return timeFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
+  }
+  
+  func getDayFor(timestamp: Int) -> String {
+    return dayFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
   }
   
   /// Функция, которая вяжет номер анимации с сервера и Lottie анимацию.

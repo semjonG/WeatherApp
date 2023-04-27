@@ -11,8 +11,6 @@ import Foundation
 /// Этот блок с полями универсальный: приходит и для поля current, и для hourly
 struct Weather: Codable, Identifiable {
   let date: Int
-//  let sunrise: Int?
-//  let sunset: Int?
   let temperature: Double
   let feelsLike: Double
   let pressure: Int
@@ -26,8 +24,6 @@ struct Weather: Codable, Identifiable {
   
   enum CodingKeys: String, CodingKey {
     case date = "dt"
-//    case sunrise
-//    case sunset
     case temperature = "temp"
     case feelsLike = "feels_like"
     case pressure
