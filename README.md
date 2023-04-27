@@ -26,8 +26,8 @@ struct WeatherAPI {
     <td>Weekly forecast</td>
   </tr>
   <tr>
-    <td><img width="300" src="https://github.com/semjonG/WeatherApp/blob/main/runningApp.gif?raw=true"></td>
-    <td><img width="300" src="https://github.com/semjonG/WeatherApp/blob/main/Main.png?raw=true"></td>
-    <td><img width="300" src="https://github.com/semjonG/WeatherApp/blob/main/Forecast.png?raw=true"></td>
+    <td><img width="300" src="https://github.com/semjonG/WeatherApp/blob/main/runningApp.gif"></td>
+    <td><img width="300" src="https://github.com/semjonG/WeatherApp/blob/main/Main.png"></td>
+    <td><img width="300" src="https://github.com/semjonG/WeatherApp/blob/main/Forecast.png"></td>
   </tr>
   <tr>
